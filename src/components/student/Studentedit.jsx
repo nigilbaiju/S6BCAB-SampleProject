@@ -2,13 +2,10 @@ import { Button, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import './student.css'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import baseUrl from '../../Api'
 
 const Studentedit = (props) => {
     var [inputs,setInputs]=useState(props.data)
-
-    const navigate = useNavigate();
     
     const inputhandler =(event)=> {
         const {name,value}=event.target

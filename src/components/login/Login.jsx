@@ -1,53 +1,107 @@
-import { TextField } from '@mui/material'
-import React, { useState } from 'react'
-import './login.css'
-import { useNavigate } from 'react-router-dom'
-import Home from '../home/Home'
+import React,{useEffect, useState} from 'react'
+import './Login.css'
+import Home from '../Adminpanel/Home';
 
-const Login = () => {
-    const [un,setUn] =useState('')
-    const [pwd,setPwd] =useState('')
-    const [error,setError]=useState(false)
-    const navigate=useNavigate();
 
-    const readusername = (event) =>{
-        event.preventDefault();
-        setUn(event.target.value);
-        console.log(un);
+const Login = (props) => {
 
+    // React States
+  const [errorMessages, setErrorMessages] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  
+
+  useEffect(() => {
+    const storevalue =localStorage.getItem("isSubmitted");
+    if(storevalue==="1")
+    {
+      setIsSubmitted(true);
+      console.log(storevalue);
     }
-    const readpassword = (event) =>{
-        event.preventDefault();
-        setPwd(event.target.value);
-        console.log(pwd);
-    }
+  },[setIsSubmitted])
 
-    const savedata =(event)=>{
-        event.preventDefault();
-        if(un.trim()==='' || pwd.trim() === '')
+
+  const Logout = (event) => {
+          localStorage.removeItem("isSubmitted")
+          setIsSubmitted(false)
+  }
+  // User Login info
+  const database = [
+    {
+      username: "aa",
+      password: "aa"
+    }
+  ];
+
+  const errors = {
+    uname: "invalid username",
+    pass: "invalid password"
+  };
+
+  const handleSubmit = (event) => {
+    //Prevent page reload
+    event.preventDefault();
+    var { uname, pass } = document.forms[0];
+
+    // Find user login info
+    const userData = database.find((user) => user.username === uname.value);
+
+    // Compare user info
+    if (userData) 
+    {
+        if (userData.password !== pass.value) 
         {
-            setError(true)
-            return
-        }
-        else
+            setErrorMessages({ name: "pass", message: errors.pass });
+        } 
+        else 
         {
-            setError(false)
-            navigate('/home')
+            localStorage.setItem("isSubmitted",'1')
+            setIsSubmitted(true);
         }
-
+    } 
+    else 
+    {
+        setErrorMessages({ name: "uname", message: errors.uname });
     }
+  };
+
+  // Generate JSX code for error message
+  const renderErrorMessage = (name) =>
+    name === errorMessages.name && (
+      <div className="error">{errorMessages.message}</div>
+    );
+
+  // JSX code for login form
+  const renderForm = (
+    <div className="app">
+      <div className="login-form">
+        <div className="title">Sign In</div>
+    <div className="form">
+      <form onSubmit={handleSubmit}>
+        <div className="input-container">
+          <label>Username </label>
+          <input type="text" name="uname" required />
+          {renderErrorMessage("uname")}
+        </div>
+        <div className="input-container">
+          <label>Password </label>
+          <input type="password" name="pass" required />
+          {renderErrorMessage("pass")}
+        </div>
+        <div className="button-container">
+          <input type="submit" />
+        </div>
+      </form>
+    </div>
+    </div>
+    </div>
+  );
 
   return (
-    <div>
-        <form className='tt'>
-        <h1 className='aa'>SIGN IN</h1>
-        USER NAME<input type="text"  onChange={readusername}/><br/><br/>
-        PASSWORD<input type="password" onChange={readpassword}/><br/><br/>
-        <button type="submit" onClick={savedata} >LOG IN</button><br/>
-        {error && 'All fields must be entered'}
-        </form>
-         
-    </div>
+   <div>
+       {!isSubmitted && renderForm}
+       {isSubmitted && <Home checkLogout={Logout}/>}
+   </div>
   )
 }
 

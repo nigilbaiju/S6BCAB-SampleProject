@@ -1,7 +1,8 @@
-import { Button, InputLabel, Select, TextField } from '@mui/material'
+import { Button, InputLabel, TextField } from '@mui/material'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import baseUrl from '../../Api'
+import './certificate.css'
 
 const Certificate = () => {
 
@@ -53,8 +54,8 @@ const Certificate = () => {
 
 
   return (
-    <div>
-<InputLabel id="demo-simple-select-label">Name</InputLabel>
+    <div className='aa'>
+    Student Name: 
     <select name="sid" value={inputs.sid} onChange={inputhandler}  >
         {
             students.map((value,index)=>{
@@ -66,10 +67,13 @@ const Certificate = () => {
             })
         }
     </select>
+    <br/><br/>
+    Qualification:
+    <TextField  variant="filled" name="qualification" value={inputs.qualification}  onChange={inputhandler} />
     <br/><br/><br/>
-  <TextField id="outlined-basic" name="qualification" onChange={inputhandler} value={inputs.qualification} /><br/><br/><br/>
-  CERTIFICATE<input type="file"   onChange={handleimage}/><br/><br/><br/>
-  <Button variant="outlined" onClick={savedata}>SUBMIT</Button>
+    CERTIFICATE <input type="file" onChange={handleimage}/>
+    <br/><br/><br/>
+    <Button variant="outlined" onClick={savedata}>SUBMIT</Button>
 
     </div>
   )
