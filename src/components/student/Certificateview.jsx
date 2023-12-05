@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import baseUrl from '../../Api'
 import {Buffer} from 'buffer';
+import './view.css'
 
 const Certificateview = () => {
     var[certdetails,setCertdetails] = useState([]);
@@ -18,7 +19,7 @@ const Certificateview = () => {
 
 
   return (
-  <div>
+  <div className='bb'>
     <Typography >STUDENT VIEW</Typography><br/><br/>
     <TableContainer>
     <Table >

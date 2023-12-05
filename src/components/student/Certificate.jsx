@@ -1,8 +1,9 @@
-import { Button, InputLabel, TextField } from '@mui/material'
+import { Button,TextField } from '@mui/material'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import baseUrl from '../../Api'
 import './certificate.css'
+import { useNavigate } from 'react-router-dom';
 
 const Certificate = () => {
 
@@ -10,6 +11,7 @@ const Certificate = () => {
     var [students,setStudents] = useState([]);
     var [selectedimage,setSelectedimage] = useState(null);
    
+    const navigate = useNavigate();
 
     useEffect(()=>{
         axios.get(baseUrl+"/student/sview")
@@ -48,7 +50,7 @@ const Certificate = () => {
         .catch((err)=>{
            console.log("error")
         })
-
+        navigate('/certificateview')
     }
 
 

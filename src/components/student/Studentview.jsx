@@ -5,6 +5,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import Studentedit from './Studentedit';
 import baseUrl from '../../Api'
+import './view.css'
 
 const Studentview = () => {
     var[students,setStudents] = useState([]);
@@ -23,7 +24,7 @@ const Studentview = () => {
 
 const deletevalues =(id)=>{
     console.log("deleted",id)
-    axios.put(baseUrl+"/updatestatus/"+id)
+    axios.put(baseUrl+"/student/updatestatus/"+id)
     .then((response)=>{
         alert("DELETED")
     window.location.reload(false);
@@ -36,7 +37,7 @@ setSelected(value);
 setUpdate(true);
 }
 var result=
-<div>
+<div className='bb'>
 <Typography >STUDENT VIEW</Typography><br/><br/>
 <TableContainer>
 <Table >

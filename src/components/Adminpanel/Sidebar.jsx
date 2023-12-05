@@ -14,8 +14,8 @@ const Sidebar = () => {
        </ul>
        View
        <ul>
-       <a href="/studentview"><li>Product View</li></a>
-       <a href="/certificateview"><li>Category View</li></a>
+       <a href="/studentview"><li>Student View</li></a>
+       <a href="/certificateview"><li>Certificate View</li></a>
       
       </ul>
       
