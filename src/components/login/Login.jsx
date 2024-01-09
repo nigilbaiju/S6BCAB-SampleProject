@@ -3,7 +3,7 @@ import './Login.css'
 import Home from '../Adminpanel/Home';
 
 
-const Login = (props) => {
+const Login = () => {
 
     // React States
   const [errorMessages, setErrorMessages] = useState({});
